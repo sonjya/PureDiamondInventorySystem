@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
@@ -56,7 +57,13 @@ class BrandController extends Controller
     }
 
     public function destroy($id) {
-        $brand = Brand::find($id);
-        $brand->delete();
+        try {
+            $brand = Brand::find($id);
+            $brand->delete();
+        } catch (Exception $e) {
+            throw ValidationException::withMessages([ 
+                'BrandName' => 'Brand cannot be deleted. This item is referred to by another object.',
+            ]);
+        }
     }
 }

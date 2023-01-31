@@ -20,6 +20,11 @@ const form = useForm({
     IsActive: '',
 });
 
+const oldForm = useForm({
+    BrandName: '',
+    IsActive: '',
+});
+
 const updater = useForm({
     toastDescription: '',
 })
@@ -34,11 +39,12 @@ const closeAddModal = () => {
     form.clearErrors()
 }
 
-
 const viewModal = ref(false);
 const openViewModal = (BrandID,BrandName,IsActive) => {
     form.BrandID = BrandID;
+    oldForm.BrandName = BrandName;
     form.BrandName = BrandName;
+    oldForm.IsActive = IsActive;
     form.IsActive = IsActive;
     viewModal.value = true;
 }
@@ -62,15 +68,19 @@ const addForm = () => {
 }
 
 const updateForm = () => {
-    form.patch(route('brands.update', form.BrandID), {
-        preserveScroll: true,
-        onSuccess: () => {
-            viewModal.value = false;
-            updater.toastDescription = form.BrandName + " has been updated.";
-            form.reset();
-            form.clearErrors()
-        }
-    })
+    if(form.BrandName == oldForm.BrandName && form.IsActive == oldForm.IsActive) {
+        console.log('NO ACTION');
+    } else {
+        form.patch(route('brands.update', form.BrandID), {
+            preserveScroll: true,
+            onSuccess: () => {
+                viewModal.value = false;
+                updater.toastDescription = form.BrandName + " has been updated.";
+                form.reset();
+                form.clearErrors()
+            }
+        })
+    }
 }
 
 const deleteForm = () => {
