@@ -27,6 +27,16 @@ const form = useForm({
     IsActive: '',
 });
 
+const oldForm = useForm({
+    ItemName: '',
+    ItemPrice: '',
+    ItemUOM: '',
+    BrandID: '',
+    MinStock: '',
+    ReorderQty: '',
+    IsActive: '',
+});
+
 const updater = useForm({
     toastDescription: '',
 });
@@ -38,6 +48,7 @@ const openAddModal = () => {
 const closeAddModal = () => {
     addModal.value = false;
     form.reset();
+    form.clearErrors();
 }
 
 const viewModal = ref(false);
@@ -50,11 +61,20 @@ const openViewModal = (ItemID,ItemName,ItemPrice,ItemUOM,BrandID,MinStock,Reorde
     form.MinStock = MinStock;
     form.ReorderQty = ReorderQty;
     form.IsActive = IsActive;
+
+    oldForm.ItemName = ItemName;
+    oldForm.ItemPrice = ItemPrice;
+    oldForm.ItemUOM = ItemUOM;
+    oldForm.BrandID = BrandID;
+    oldForm.MinStock = MinStock;
+    oldForm.ReorderQty = ReorderQty;
+    oldForm.IsActive = IsActive;
     viewModal.value = true;
 }
 const closeViewModal = () => {
     viewModal.value = false;
     form.reset();
+    form.clearErrors();
 }
 
 const addForm = () => {
@@ -64,20 +84,27 @@ const addForm = () => {
             addModal.value = false;
             updater.toastDescription = "New inventory item has been added.";
             form.reset();
+            form.clearErrors();
         }
     })
 }
 
 const updateForm = () => {
-    form.patch(route('items.update', form.ItemID), {
-        preserveScroll:true,
-        onSuccess: () => {
-            viewModal.value = false;
-            updater.toastDescription = form.ItemName + " has been updated.";
-            form.reset();
-        }
 
-    })
+    if(form.ItemName == oldForm.ItemName && form.ItemPrice == oldForm.ItemPrice && form.ItemUOM == oldForm.ItemUOM && form.BrandID == oldForm.BrandID && form.MinStock == oldForm.MinStock && form.ReorderQty == oldForm.ReorderQty && form.IsActive == oldForm.IsActive) {
+        console.log('NO ACTION');
+    } else {
+        form.patch(route('items.update', form.ItemID), {
+            preserveScroll:true,
+            onSuccess: () => {
+                viewModal.value = false;
+                updater.toastDescription = form.ItemName + " has been updated.";
+                form.reset();
+                form.clearErrors();
+            }
+        })
+    }
+
 }
 
 const deleteForm = () => {
@@ -87,6 +114,7 @@ const deleteForm = () => {
             viewModal.value = false;
             updater.toastDescription = form.ItemName + " has been deleted.";
             form.reset();
+            form.clearErrors();
         }
     });
 }

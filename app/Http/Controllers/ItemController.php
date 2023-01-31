@@ -59,16 +59,24 @@ class ItemController extends Controller
             'IsActive' => 'required', 
         ]);
 
-        $item = Item::find($id);
-        $item->ItemID = $request->ItemID;
-        $item->ItemName = $request->ItemName;
-        $item->ItemPrice = $request->ItemPrice;
-        $item->ItemUOM = $request->ItemUOM;
-        $item->BrandID = $request->BrandID;
-        $item->MinStock = $request->MinStock;
-        $item->ReorderQty = $request->ReorderQty;
-        $item->IsActive = $request->IsActive;
-        $item->save();
+        $searchBrand = Item::where('ItemID','!=',$id)->where('ItemName',$request->ItemName)->count();
+
+        if($searchBrand == 0) {
+            $item = Item::find($id);
+            $item->ItemID = $request->ItemID;
+            $item->ItemName = $request->ItemName;
+            $item->ItemPrice = $request->ItemPrice;
+            $item->ItemUOM = $request->ItemUOM;
+            $item->BrandID = $request->BrandID;
+            $item->MinStock = $request->MinStock;
+            $item->ReorderQty = $request->ReorderQty;
+            $item->IsActive = $request->IsActive;
+            $item->save();
+        } else {
+            throw ValidationException::withMessages([ 
+                'ItemName' => 'Brand name already exists in the database.',
+            ]);
+        }
     }
 
     public function destroy($id) {
