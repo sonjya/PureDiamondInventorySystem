@@ -7,18 +7,18 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-class EmailVerificationNotificationController extends Controller
+class usernameVerificationNotificationController extends Controller
 {
     /**
-     * Send a new email verification notification.
+     * Send a new username verification notification.
      */
     public function store(Request $request): RedirectResponse
     {
-        if ($request->user()->hasVerifiedEmail()) {
+        if ($request->user()->hasVerifiedusername()) {
             return redirect()->intended(RouteServiceProvider::HOME);
         }
 
-        $request->user()->sendEmailVerificationNotification();
+        $request->user()->sendusernameVerificationNotification();
 
         return back()->with('status', 'verification-link-sent');
     }
