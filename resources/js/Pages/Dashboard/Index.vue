@@ -21,7 +21,7 @@ defineProps({
                 </div>
         
                 <Overview 
-                    class="mt-3"
+                    class="mt-3 cursor-default"
                     :totalBrands="totalBrands"
                     :totalItems="totalItems"
                 />

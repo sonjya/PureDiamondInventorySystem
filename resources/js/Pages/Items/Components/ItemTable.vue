@@ -7,6 +7,7 @@ import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import WarningButton from '@/Components/WarningButton.vue';
 import SuccessButton from '@/Components/SuccessButton.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 
@@ -356,7 +357,7 @@ const deleteForm = () => {
                         <InputError class="mt-2" :message="form.errors.IsActive" />
                     </div>
                     <div class="flex justify-end mt-3 gap-1">
-                        <PrimaryButton type="button" @click="updateForm">UPDATE</PrimaryButton>
+                        <WarningButton type="button" @click="updateForm">UPDATE</WarningButton>
                         <DangerButton type="button" @click="deleteForm">DELETE</DangerButton>
                     </div>    
                 </form>
