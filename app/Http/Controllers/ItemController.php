@@ -10,9 +10,9 @@ use Inertia\Inertia;
 
 class ItemController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
         return Inertia::render('Items/Index',[
-            'items' => Item::get(),
+            'items' => Item::where('ItemName','LIKE','%'.$request->search.'%')->get(),
             'brands' => Brand::get(),
         ]);
     }

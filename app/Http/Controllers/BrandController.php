@@ -10,9 +10,9 @@ use Inertia\Inertia;
 
 class BrandController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
         return Inertia::render('Brands/Index',[
-            'brands' => Brand::get(),
+            'brands' => Brand::where('BrandName','LIKE','%'.$request->search.'%')->get(),
         ]);
     }
 
