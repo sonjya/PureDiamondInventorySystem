@@ -15,6 +15,7 @@ import DangerButton from '@/Components/DangerButton.vue';
 const props = defineProps({
     items: Array,
     brands: Array,
+    newItemID: Number,
 });
 
 const form = useForm({
@@ -195,6 +196,17 @@ const deleteForm = () => {
             <div class="p-6">
                 <h3 class="font-bold">ADD ITEM</h3>
                 <form>
+                    <div class="mt-3">
+                        <InputLabel for="ItemName" value="Item ID"/>
+                        <TextInput
+                            id="ItemID"
+                            type="number"
+                            v-model="props.newItemID"
+                            class="w-full"
+                            required
+                            readonly
+                        />
+                    </div>
                     <div class="mt-3">
                         <InputLabel for="ItemName" value="Item Name"/>
                         <TextInput

@@ -11,8 +11,10 @@ use Inertia\Inertia;
 class BrandController extends Controller
 {
     public function index(Request $request) {
+        $newBrandID = Brand::orderByDesc('BrandID')->first('BrandID');
         return Inertia::render('Brands/Index',[
             'brands' => Brand::where('BrandName','LIKE','%'.$request->search.'%')->get(),
+            'newBrandID' => $newBrandID->BrandID + 1,
         ]);
     }
 

@@ -6,6 +6,7 @@ import TextInput from '@/Components/TextInput.vue';
 
 const props = defineProps({
     brands: Array,
+    newBrandID: Number,
 });
 
 const form = useForm({
@@ -40,6 +41,7 @@ const searchBrand = () => {
                 <BrandTable
                     class="mt-3"
                     :brands="brands"
+                    :newBrandID="newBrandID"
                 />
             </div>        
         </div>

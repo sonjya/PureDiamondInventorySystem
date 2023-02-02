@@ -7,6 +7,7 @@ import TextInput from '@/Components/TextInput.vue';
 const props = defineProps({
     items: Array,
     brands: Array,
+    newItemID: Number,
 });
 
 const form = useForm({
@@ -42,6 +43,7 @@ const searchItem = () => {
                     class="mt-3"
                     :items="items"
                     :brands="brands"
+                    :newItemID="newItemID"
                 />
             </div>
         </div>

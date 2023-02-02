@@ -13,6 +13,7 @@ import DangerButton from '@/Components/DangerButton.vue';
 
 const props = defineProps({
     brands: Array,
+    newBrandID: Number,
 });
 
 const form = useForm({
@@ -181,8 +182,19 @@ const deleteForm = () => {
 
         <Modal :show="addModal" @close="closeAddModal">
             <div class="p-6">
-                <h3 class="font-bold">VIEW BRAND</h3>
+                <h3 class="font-bold">ADD BRAND</h3>
                 <form>
+                    <div class="mt-3">
+                        <InputLabel for="BrandID" value="Brand ID"/>
+                        <TextInput
+                            id="BrandID"
+                            type="text"
+                            v-model="props.newBrandID"
+                            class="w-full"
+                            required
+                            readonly
+                        />
+                    </div>
                     <div class="mt-3">
                         <InputLabel for="BrandName" value="Brand Name"/>
                         <TextInput

@@ -11,9 +11,11 @@ use Inertia\Inertia;
 class ItemController extends Controller
 {
     public function index(Request $request) {
+        $newItemID = Item::orderByDesc('ItemID')->first('ItemID');
         return Inertia::render('Items/Index',[
             'items' => Item::where('ItemName','LIKE','%'.$request->search.'%')->get(),
             'brands' => Brand::get(),
+            'newItemID' => $newItemID->ItemID + 1,
         ]);
     }
 
