@@ -197,7 +197,7 @@ const deleteForm = () => {
                 <h3 class="font-bold">ADD ITEM</h3>
                 <form>
                     <div class="mt-3">
-                        <InputLabel for="ItemName" value="Item ID"/>
+                        <InputLabel for="ItemID" value="Item ID"/>
                         <TextInput
                             id="ItemID"
                             type="number"
