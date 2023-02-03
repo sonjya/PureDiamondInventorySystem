@@ -19,7 +19,7 @@ const searchBrand = () => {
 </script>
 
 <template>
-    <Head title="DASHBOARD" />
+    <Head title="BRANDS" />
 
     <AuthenticatedLayout>
         <div class="py-12">

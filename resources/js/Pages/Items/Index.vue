@@ -21,7 +21,7 @@ const searchItem = () => {
 </script>
 
 <template>
-    <Head title="DASHBOARD" />
+    <Head title="ITEMS" />
 
     <AuthenticatedLayout>
         <div class="py-12">
