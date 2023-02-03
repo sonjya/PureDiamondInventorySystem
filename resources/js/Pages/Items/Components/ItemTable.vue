@@ -178,7 +178,7 @@ const deleteForm = () => {
                         <td class="px-6 py-4">
                             {{ item.ReorderQty }}
                         </td>
-                        <td class="px-6 py-4 text-green-500" :class="{'text-red-500': item.IsActive=='No'}">
+                        <td :class="{'x-6 py-4 text-red-500': item.IsActive == 'No' , 'x-6 py-4 text-green-500': item.IsActive == 'Yes'  }">
                             {{ item.IsActive }}
                         </td>
                     </tr>
